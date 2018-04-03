@@ -9,6 +9,7 @@ import (
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/datastore"
 	"google.golang.org/appengine/log"
+	_ "google.golang.org/appengine/remote_api"
 )
 
 func main() {
