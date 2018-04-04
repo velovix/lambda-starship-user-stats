@@ -1,18 +1,24 @@
-package main
+package datatypes
 
-type replCommand struct {
+const REPLCommandKind = "REPLCommand"
+
+type REPLCommand struct {
 	UID       string `json:"uid"`
 	Timestamp int64  `json:"timestamp"`
 	Command   string `json:"command"`
 }
 
-type editorContent struct {
+const EditorContentKind = "EditorContent"
+
+type EditorContent struct {
 	UID       string `json:"uid"`
 	Timestamp int64  `json:"timestamp"`
 	Content   string `json:"content"`
 }
 
-type errorInstance struct {
+const ErrorInstanceKind = "Error"
+
+type ErrorInstance struct {
 	UID         string `json:"uid"`
 	Timestamp   int64  `json:"timestamp"`
 	Description string `json:"description"`

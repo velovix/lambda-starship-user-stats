@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/velovix/lambda-starship-user-stats/datatypes"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/datastore"
 	"google.golang.org/appengine/log"
@@ -25,11 +26,11 @@ func main() {
 func newREPLCommandHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := appengine.NewContext(r)
 
-	var content replCommand
+	var content datatypes.REPLCommand
 	json.NewDecoder(r.Body).Decode(&content)
 
 	// Write to the datastore
-	key := datastore.NewKey(ctx, "REPLCommand", "", 0, nil)
+	key := datastore.NewKey(ctx, datatypes.REPLCommandKind, "", 0, nil)
 	if _, err := datastore.Put(ctx, key, &content); err != nil {
 		log.Errorf(ctx, "could not write to datastore: %v", err)
 		http.Error(w, "Could not save REPL command", 500)
@@ -49,11 +50,11 @@ func newREPLCommandHandler(w http.ResponseWriter, r *http.Request) {
 func newEditorContentHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := appengine.NewContext(r)
 
-	var content editorContent
+	var content datatypes.EditorContent
 	json.NewDecoder(r.Body).Decode(&content)
 
 	// Write to the datastore
-	key := datastore.NewKey(ctx, "EditorContent", "", 0, nil)
+	key := datastore.NewKey(ctx, datatypes.EditorContentKind, "", 0, nil)
 	if _, err := datastore.Put(ctx, key, &content); err != nil {
 		log.Errorf(ctx, "could not write to datastore: %v", err)
 		http.Error(w, "Could not save editor content", 500)
@@ -73,11 +74,11 @@ func newEditorContentHandler(w http.ResponseWriter, r *http.Request) {
 func newErrorHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := appengine.NewContext(r)
 
-	var content errorInstance
+	var content datatypes.ErrorInstance
 	json.NewDecoder(r.Body).Decode(&content)
 
 	// Write to the datastore
-	key := datastore.NewKey(ctx, "Error", "", 0, nil)
+	key := datastore.NewKey(ctx, datatypes.ErrorInstanceKind, "", 0, nil)
 	if _, err := datastore.Put(ctx, key, &content); err != nil {
 		log.Errorf(ctx, "could not write to datastore: %v", err)
 		http.Error(w, "Could not save error", 500)
